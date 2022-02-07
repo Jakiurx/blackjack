@@ -24,6 +24,23 @@
         <div id="karta_krupier6" > <img id="krupier6" src=" "></img> </div>
         <div id="karta_krupier7" > <img id="krupier7" src=" "></img> </div>
         <div id="karta_krupier8" > <img id="krupier8" src=" "></img> </div>
+        
+        <div id="okno">
+            <div id="stawka_window">
+                <p>Twoja stawka:</p>
+                <input class="crd" value=0 type="number" id="bet">
+    
+            </div>
+            <div hidden id="alert_window">
+                <p id="napis">Nob Wygrał</p>
+                <input type="button" id="potwierdz" value="Potwierdź" onclick="potwierdz()">
+            </div>
+            <div hidden id="insurance_window">
+                <p id="napis">Insurance?</p>
+                <input type="button" class="btn_yes" value="Tak" onclick="insurance(true)">
+                <input type="button" class="btn_no" value="Nie" onclick="insurance(false)">
+            </div>
+        </div>
 
         <div id="karta_gracz1" > <img id="gracz1" src=" "></img> </div>
         <div id="karta_gracz2" > <img id="gracz2" src=" "></img> </div>
@@ -35,11 +52,13 @@
         <div id="karta_gracz8" > <img id="gracz8" src=" "></img> </div>
         <div id="karty_stos"> <img id="stos_kart" src="karty/odwrocona.png"></img> </div>
     </div>
-    <div class="przyciski">
-        <input value=0 type="number" id="bet">
-        <input value="Start" type="button" onclick="start()">
-        <input value="Hit" type="button" onclick="hit()">
-        <input value="Stand" type="button" onclick="stand()">
+    <div class="menu">
+        <div class="przyciski">
+            <input class="btn" id="start" value="Start" type="button" onclick="start()">
+            <input disabled class="btn" id="hit" value="Hit" type="button" onclick="hit()">
+            <input disabled class="btn" id="stand" value="Stand" type="button" onclick="stand()">
+            <input disabled class="btn" id="double" value="Double" type="button" onclick="double()">
+        </div>
     </div>
 
 
