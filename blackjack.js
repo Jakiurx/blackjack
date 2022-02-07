@@ -24,7 +24,8 @@ function start(){
     uzyte = [];
     suma = [0,0,0,0]; //indeksy 0,2 = gracz, 1,3 = krupier 
     stawka = document.getElementById("bet").value;
-    document.getElementById("credity").innerHTML = credits - stawka + "$";
+    credits -= stawka;
+    document.getElementById("credity").innerHTML = credits + "$";
     podmien_karte("gracz1");
     setTimeout(podmien_karte,1000,["krupier1"]);
     setTimeout(podmien_karte,2000,["gracz2"]);
