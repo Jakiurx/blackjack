@@ -2,7 +2,7 @@ let karty = ["2c", "2d", "2h", "2s", "3c", "3d", "3h", "3s", "4c", "4d", "4h", "
 let wartosc = [2,3,4,5,6,7,8,9,10,10,10,10,"as"]
 let miejsca = [["gracz1","gracz2","gracz3","gracz4","gracz5","gracz6","gracz7","gracz8"],
 ["krupier1","krupier2","krupier3","krupier4","krupier5","krupier6","krupier7","krupier8"]]
-let suma, uzyte, zakryta, hittuj, licznik, tura; //true = gracz, false = krupier;
+let suma, stawka, uzyte, zakryta, hittuj, licznik, tura; //true = gracz, false = krupier;
 
 function randomNumber(number) { //losuje liczbę od 0 do -number-
     let i = Math.floor(Math.random() * number);
@@ -23,6 +23,7 @@ function start(){
     licznik = [0,0];
     uzyte = [];
     suma = [0,0,0,0]; //indeksy 0,2 = gracz, 1,3 = krupier 
+    stawka = document.getElementById("bet").value;
     podmien_karte("gracz1");
     setTimeout(podmien_karte,1000,["krupier1"]);
     setTimeout(podmien_karte,2000,["gracz2"]);
@@ -69,7 +70,7 @@ function licz_sume(miejsce){
             suma[0] += wartosc[Math.floor(i/4)];
             suma[2] += wartosc[Math.floor(i/4)];
         }
-        licznik[0]++
+        licznik[0]++;
     }
     else {
         if(wartosc[Math.floor(i/4)] == "as") {
@@ -80,7 +81,7 @@ function licz_sume(miejsce){
             suma[1] += wartosc[Math.floor(i/4)];
             suma[3] += wartosc[Math.floor(i/4)];
         }
-        licznik[1]++
+        licznik[1]++;
     }
 }
 
@@ -88,16 +89,19 @@ function wygrana(){
     console.log("win");
     if(!tura){
         if(suma[1]>21) {
+            credits += stawka*2;
             alert("Wygrywa Gracz");
             clearInterval(hittuj);
         }
         else if(suma[3]>=17 && suma[3]<=21) {
             if(suma[2] <= 21){
                 if(suma[2]-suma[3] == 0) {
+                    credits += stawka;
                     alert("Remis");
                     clearInterval(hittuj);
                 }
                 if(suma[2]-suma[3] > 0) {
+                    credits += stawka*2;
                     alert("Wygrywa Gracz");
                     clearInterval(hittuj);
                 }
@@ -108,10 +112,12 @@ function wygrana(){
             }
             else{ 
                 if(suma[0]-suma[3] == 0) {
+                    credits +=stawka;
                     alert("Remis");
                     clearInterval(hittuj);
                 }
                 if(suma[0]-suma[3] > 0) {
+                    credits += stawka*2;
                     alert("Wygrywa Gracz");
                     clearInterval(hittuj);
                 }
@@ -124,10 +130,12 @@ function wygrana(){
         else if(suma[1]>=17){
             if(suma[2] <= 21){
                 if(suma[2]-suma[1] == 0) {
+                    credits += stawka;
                     alert("Remis");
                     clearInterval(hittuj);
                 }
                 if(suma[2]-suma[1] > 0) {
+                    credits += stawka*2;
                     alert("Wygrywa Gracz");
                     clearInterval(hittuj);
                 }
@@ -138,10 +146,12 @@ function wygrana(){
             }
             else{
                 if(suma[0]-suma[1] == 0) {
+                    credits += stawka;
                     alert("Remis");
                     clearInterval(hittuj);
                 }
                 if(suma[0]-suma[1] > 0) {
+                    credits += stawka*2;
                     alert("Wygrywa Gracz");
                     clearInterval(hittuj);
                 }
@@ -166,11 +176,13 @@ function blackjack(){
     if(suma[2] == 21 && suma[3] == 21){
         tura = !tura;
         odwroc_karte();
+        credits += stawka;
         setTimeout(alert,1100,["Remis"]);
     }
     else if (suma[2] == 21) {
         tura = !tura;
         odwroc_karte();
+        credits += stawka*2;
         setTimeout(alert,1100,["Blackjack Gracz"]);
     }
     else if (suma[3] == 21) {
@@ -178,6 +190,7 @@ function blackjack(){
         odwroc_karte();
         setTimeout(alert,1100,["Blackjack Krupier"]);
     }
+    document.getElementById("credity").innerHTML = credits + "$";
 }
 
 function odwroc_karte(){
